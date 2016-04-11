@@ -1,6 +1,24 @@
 var c = C$(2, 4);
 
 
+// Variant from http://stackoverflow.com/questions/28927510/add-function-that-works-with-different-combinations-of-chaining-arguments/28927773
+function addCopied(){
+    var sum =  this instanceof Number?this: 0;
+    for( var i in arguments ){
+        sum += arguments[i];
+    }
+
+    var ret = add.bind(sum);
+    ret.add = ret;
+    ret.value = ret.valueOf = function() { return sum; };
+
+    ret.toString = sum.toString.bind(sum);
+
+    return ret;
+}
+
+
+
 
 // // create array from input value with class 'selector'
 // var createInputArray = function (selector) {
